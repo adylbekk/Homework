@@ -48,7 +48,10 @@ def gcd(a, b):
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
+    # Вычисляет наибольший общий делитель (НОД) с помощью алгоритма Евклида.
+    while b != 0:
+        a, b = b, a % b
+    return a
     pass
 def multiplicative_inverse(e, phi):
     """
