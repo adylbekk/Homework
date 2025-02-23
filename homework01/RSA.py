@@ -1,3 +1,4 @@
+import random
 def is_prime(n):
     """
     >>> is_prime(2)
@@ -16,31 +17,29 @@ def is_prime(n):
     return True
     pass
 def generate_keypair(p, q):
+    # Генерирует пару ключей, используя два простых числа p и q.
     if not (is_prime(p) and is_prime(q)):
-        raise ValueError('Both numbers must be prime.')
-    elif p == q:
-        raise ValueError('p and q cannot be equal')
-
-    # n = pq
-    # PUT YOUR CODE HERE
-
-    # phi = (p-1)(q-1)
-    # PUT YOUR CODE HERE
-
-    # Choose an integer e such that e and phi(n) are coprime
+        raise ValueError('Оба числа должны быть простыми.')
+    if p == q:
+        raise ValueError('p и q не могут быть равны')
+    
+    # Вычисляем n и phi
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    
+    # Выбираем e такое, что 1 < e < phi и НОД(e, phi) == 1
     e = random.randrange(1, phi)
-
-    # Use Euclid's Algorithm to verify that e and phi(n) are comprime
     g = gcd(e, phi)
     while g != 1:
         e = random.randrange(1, phi)
         g = gcd(e, phi)
-
-    # Use Extended Euclid's Algorithm to generate the private key
+    
+    # Вычисляем d, мультипликативно обратное число для e по модулю phi
     d = multiplicative_inverse(e, phi)
-    # Return public and private keypair
-    # Public key is (e, n) and private key is (d, n)
+    
+    # Возвращаем открытый (e, n) и закрытый (d, n) ключи
     return ((e, n), (d, n))
+
 def gcd(a, b):
     """
     >>> gcd(12, 15)
