@@ -9,7 +9,16 @@ def encrypt_caesar(plaintext):
     >>> encrypt_caesar("")
     ''
     """
-    # PUT YOUR CODE HERE
+    ciphertext = ""
+    for c in plaintext:
+        if c.isupper():
+            shifted = (ord(c) - ord('A') + 3) % 26 + ord('A')
+            ciphertext += chr(shifted)
+        elif c.islower():
+            shifted = (ord(c) - ord('a') + 3) % 26 + ord('a')
+            ciphertext += chr(shifted)
+        else:
+            ciphertext += c
     return ciphertext
 
 
