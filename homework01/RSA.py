@@ -58,5 +58,12 @@ def multiplicative_inverse(e, phi):
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
+        # Вычисляет мультипликативно обратный элемент d для e по модулю phi.
+    original_phi = phi
+    x, last_x = 0, 1
+    while phi != 0:
+        quotient = e // phi
+        e, phi = phi, e % phi
+        last_x, x = x, last_x - quotient * x
+    return last_x % original_phi
     pass
